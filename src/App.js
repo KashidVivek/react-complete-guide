@@ -1,16 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
+import React,{ useState } from 'react';
 import './App.css';
 import Person from './Person/Person'
 
-function App() {
+const App = props => {
+  const [personsState, setPersonsState] = useState({
+    persons: [
+      {name: "Vivek", age: 23},
+      {name: "Max", age: 28}
+    ]
+  })
+
+  const switchNameHandler = () => {
+    // console.log('Was Clicked!') 
+    // this.state.persons[0].name = "Vivek Kashid";   WRONG WAY
+    setPersonsState({
+      persons: [
+        {name: "Vivek Kashid", age: 23},
+        {name: "Max", age: 28}
+      ]
+    })
+  }
+
   return (
     <div className="App">
       <h1>Sample React App!</h1>
-      <Person name='Vivek' age='23'/>
-      <Person name='Max' age='28'> Hobbies:Reading</Person>
+      <button onClick={switchNameHandler} > Switch Person</button>
+      <Person name={personsState.persons[0].name} age={personsState.persons[0].age}/>
+      <Person name={personsState.persons[1].name} age={personsState.persons[1].age}> Hobbies: Reading</Person>
     </div>
   );
+
 }
 
 export default App;
+
+
